@@ -10,6 +10,12 @@ module.exports = function (app) {
     app.route('/memberstovalidate')
         .get(memberController.memberstovalidate);
 
+    app.route('/validatemember')
+        .put(memberController.validatemember);
+
+    app.route('/rejectmember')
+        .put(memberController.rejectmember);
+
     app.route('/permission')
         .post(memberController.permissions);
 

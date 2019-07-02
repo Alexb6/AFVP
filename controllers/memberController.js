@@ -104,6 +104,41 @@ exports.memberstovalidate = function (req, res) {
 }
 
 
+// Define the method to validate a member and change his status to 'inregistration'
+exports.validatemember = function (req, res, next) {
+    Members.update(
+        { memb_status: 'inregistration' },
+        { returning: true, where: { memb_id: req.body.memb_id } }
+    )
+        .then(user => {
+            if (user) {
+                res.status(200).json(user)
+            } else {
+                res.status(400).json({ error: 'User does not exist' });
+            }
+        })
+        .catch(next)
+}
+
+
+// Define the method to reject a member and change his status to 'rejected'
+exports.rejectmember = function (req, res, next) {
+    Members.update(
+        { memb_status: 'rejected' },
+        { returning: true, where: { memb_id: req.body.memb_id } }
+    )
+        .then(user => {
+            if (user) {
+                res.status(200).json(user)
+            } else {
+                res.status(400).json({ error: 'User does not exist' });
+            }
+        })
+        .catch(next)
+}
+
+
+
 // Define the method to check the right token
 exports.permissions = function (req, res) {
     jwt.verify(req.body.token, secureKey.secret, function (err, decoded) {
@@ -118,10 +153,3 @@ exports.permissions = function (req, res) {
 }
 
 
-// Define the method to validate the member's subscription
-exports.validatemember = function (req, res) {
-    Members.update({ memb_status: 'inregistration' }, { id: req.body.id })
-        .then(user => {
-
-        })
-}

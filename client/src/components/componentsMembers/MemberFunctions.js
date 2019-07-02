@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+// Defining the method to send a user's infos for a membership validation
 export const tovalidate = newUser => {
     return axios
         .post('/tovalidate', {
@@ -20,6 +21,7 @@ export const tovalidate = newUser => {
         })
 }
 
+// Defining the method for a user to log to his membership space
 export const login = user => {
     return axios
         .post('/login', {
@@ -35,7 +37,7 @@ export const login = user => {
         })
 }
 
-
+// Defining the method to display all the user's membership demands
 export const memberstovalidate = members => {
     return axios
         .get('/memberstovalidate', {
@@ -48,3 +50,32 @@ export const memberstovalidate = members => {
             return err;
         })
 }
+
+// Defining the method for the admin to validate a membership
+export const validatemember = memb_id => {
+    return axios
+        .put('/validatemember', {
+            memb_id: memb_id
+        })
+        .then(res => {            
+            return res.data;
+        })
+        .catch(err => {
+            return err;
+        })
+}
+
+// Defining the method for the admin to reject a membership
+export const rejectmember = memb_id => {
+    return axios
+        .put('/rejectmember', {
+            memb_id: memb_id
+        })
+        .then(res => {
+            return res.data
+        })
+        .catch(err => {
+            return err;
+        })
+}
+
