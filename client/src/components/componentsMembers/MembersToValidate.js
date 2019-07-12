@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { memberstovalidate, validatemember, rejectmember } from './MemberFunctions'
+import { memberstovalidate, validatemember, rejectmember} from './MemberFunctions'
 import Button from 'react-bootstrap/Button'
 import FlashMessage from 'react-flash-message'
+import './MembersToValidate.scss'
+
 
 class MembersToValidate extends Component {
     constructor() {
@@ -9,7 +11,7 @@ class MembersToValidate extends Component {
         this.state = {
             members: [],
             show: false,
-            message: null,
+            message: null
         };
         this.validate = this.validate.bind(this);
         this.reject = this.reject.bind(this);
@@ -18,16 +20,15 @@ class MembersToValidate extends Component {
     componentDidMount() {
         memberstovalidate()
             .then(res => {
-
                 this.setState({ members: res });
             })
     }
 
     validate(member) {
         let that = this;
-        validatemember(member.memb_id).then(function () {
+        validatemember(member).then(function () {
 
-            that.setState({ show: true, message: 'Le status de la personne a été changé en "inregistration".' });
+            that.setState({ show: true, message: 'Le status de ' + member.memb_firstname + ' ' + member.memb_name + ' a été changé en "inregistration".' });
         })
     }
 
@@ -35,7 +36,7 @@ class MembersToValidate extends Component {
         let that = this;
         rejectmember(member.memb_id).then(function () {
 
-            that.setState({ show: false, message: 'Le status de la personne a été changé en "rejected".' });
+            that.setState({ show: false, message: 'Le status de ' + member.memb_firstname + ' ' + member.memb_name + ' a été changé en "rejected".' });
         })
     }
 
@@ -54,6 +55,7 @@ class MembersToValidate extends Component {
         }
         return (
             <div className="container">
+                <div className="flashMessage">{flash}</div>
                 <div className="row">
                     <div className="col-md-6 mt-5 mx-auto">
                         <h2>Demandes d'adhésion</h2>
@@ -70,12 +72,12 @@ class MembersToValidate extends Component {
                                 <p>Diplôme : {member.memb_degree}</p><br />
                                 <Button onClick={() => { this.validate(member) }} variant="primary" >Valider</Button>
                                 <Button onClick={() => { this.reject(member) }} variant="warning" >Rejeter</Button>
-                                {flash} <hr /> <br />
+                                <hr /> <br />
                             </section>
                         )}
                     </div>
                 </div>
-            </div>
+            </div >
         )
     }
 }

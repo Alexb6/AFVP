@@ -48,7 +48,7 @@ jspm_packages/
 /client/node_modules/
 
 # Secret keys
-/config/secureKey
+/config/secureKey.js
 
 # TypeScript v1 declaration files
 typings/

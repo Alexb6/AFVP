@@ -19,7 +19,6 @@ class App extends Component {
 						<Route exact path="/tovalidate" component={MemberToValidate} />
 						<Route exact path="/login" component={MemberLogin} />
 						<Route exact path="/profile" component={MemberProfile} />
-						<Route exact path="/tovalidate" component={MemberToValidate} />
 						<Route exact path="/memberstovalidate" component={MembersToValidate} />
 					</div>
 				</div>

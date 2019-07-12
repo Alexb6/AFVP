@@ -49,8 +49,9 @@ VALUES
     (NULL, 'El Kabouss', 'Hakim', 'elkabousshakim@hotmail.com', '$2b$10$R/ghN1srinWf2wyM8Ex2z.r2FQveYugfhVRgbTUbFgaLkSB/jADzy', '', '2019-06-20', NULL, 0, 'tovalidate', 'Great !', 'Henri Hospital', 'Director', 'null', 'Londres', 'Diplome generale en USA', NULL),
     (NULL, 'memb_', 'memb_', 'memb@gg.fr', '$2b$10$i4TVtFzHAMnMz7m07loQz.weqhKmrc1G89LmHwOWwF.z39GPxFicW', NULL, '2019-06-21', NULL, 0, 'tovalidate', 'memb_', 'memb_', NULL, 'C:\\fakepath\\.gitignore', 'memb_', 'memb_', NULL),
     (NULL, 'admin', 'admin', 'admin@gmail.com', '$2b$10$JjDzO/2jN58bB0JtungJAOZFBbKeY/rgE5nD6nmAErZhOkzQ8aFam', NULL, '2019-06-21', NULL, 0, 'tovalidate', 'admin', 'admin', NULL, '', 'admin', 'admin', 3),
-    (NULL, 'superadmin', 'superadmin', 'superadmin@gmail.com', '$2b$10$WhP2qqvRpMANDhWrWOXyKegYIioVjXriUndza3UScMkFav4eTKzoC', NULL, '2019-06-21', NULL, 0, 'tovalidate', 'superadmin', 'superadmin', NULL, '', 'superadmin', 'superadmin', 4);
-
+    (NULL, 'superadmin', 'superadmin', 'superadmin@gmail.com', '$2b$10$WhP2qqvRpMANDhWrWOXyKegYIioVjXriUndza3UScMkFav4eTKzoC', NULL, '2019-06-21', NULL, 0, 'tovalidate', 'superadmin', 'superadmin', NULL, '', 'superadmin', 'superadmin', 4),
+    (NULL, 'superadmin', 'superadmin', 'superadmin@gmail.com', '$2b$10$WhP2qqvRpMANDhWrWOXyKegYIioVjXriUndza3UScMkFav4eTKzoC', NULL, '2019-06-21', NULL, 0, 'tovalidate', 'superadmin', 'superadmin', NULL, '', 'superadmin', 'superadmin', 4),
+    (NULL, 'Tran', 'Lap', 'lapb6@yahoo.com', '$2b$10$OvosUVXbfOp01tTQNvyu7O3cNqJRczomXYxErHlLITVp2Bq97JNEW', 'adherent', '2019-07-11', NULL, 0, 'tovalidate', 'ma bio', 'mon hopital', 'ma fonction', '', 'Paris', 'mon diplôme', NULL);
 /* -------------
 Table Roles
 ---------------*/

@@ -1,0 +1,10 @@
+.flashMessage {
+    position: fixed;
+    top: 0px;
+    z-index: 100;
+    .alert-success, .alert-warning {
+        p {
+            padding: 20px;
+        }
+    }
+}

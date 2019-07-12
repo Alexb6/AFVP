@@ -16,6 +16,9 @@ module.exports = function (app) {
     app.route('/rejectmember')
         .put(memberController.rejectmember);
 
+    app.route('/statustoregistered')
+        .put(memberController.statustoregistered);
+
     app.route('/permission')
         .post(memberController.permissions);
 

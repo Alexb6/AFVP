@@ -29,7 +29,7 @@ export const login = user => {
             memb_password: user.memb_password
         })
         .then(res => {
-            localStorage.setItem('usertoken', res.data)
+            localStorage.setItem('usertoken', res.data.token)
             return res.data
         })
         .catch(err => {
@@ -52,18 +52,20 @@ export const memberstovalidate = members => {
 }
 
 // Defining the method for the admin to validate a membership
-export const validatemember = memb_id => {
+export const validatemember = member => {
     return axios
         .put('/validatemember', {
-            memb_id: memb_id
+            memb_id: member.memb_id,
+            memb_email: member.memb_email
         })
-        .then(res => {            
+        .then(res => {
             return res.data;
         })
         .catch(err => {
             return err;
         })
 }
+
 
 // Defining the method for the admin to reject a membership
 export const rejectmember = memb_id => {
@@ -73,6 +75,21 @@ export const rejectmember = memb_id => {
         })
         .then(res => {
             return res.data
+        })
+        .catch(err => {
+            return err;
+        })
+}
+
+
+// Defining the method to change the member status to registered after payment
+export const statustoregistered = id => {
+    return axios
+        .put('/statustoregistered', {
+            memb_id: id
+        })
+        .then(res => {
+            return res.data;
         })
         .catch(err => {
             return err;

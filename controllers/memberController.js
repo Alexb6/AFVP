@@ -1,11 +1,13 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
 const secureKey = require('../config/secureKey');
+const nodemailer = require('../services/nodemailer');
 
 const db = require('../database/db');
 const Sequelize = require('sequelize');
 const memberModel = require('../models/Members');
 const Members = memberModel(db.sequelize, Sequelize);
+
 
 
 // Define member's subscription infos to validate method
@@ -112,6 +114,7 @@ exports.validatemember = function (req, res, next) {
     )
         .then(user => {
             if (user) {
+                nodemailer.sendmailer(req.body.memb_email)
                 res.status(200).json(user)
             } else {
                 res.status(400).json({ error: 'User does not exist' });
@@ -138,6 +141,21 @@ exports.rejectmember = function (req, res, next) {
 }
 
 
+// Define the method to change a member's status from 'inregistration'his status to 'registered'
+exports.statustoregistered = function (req, res, next) {
+    Members.update(
+        { memb_status: 'registered' },
+        { returning: true, where: { memb_id: req.body.memb_id } }
+    )
+        .then(user => {
+            if (user) {
+                res.status(200).json(user)
+            } else {
+                res.status(400).json({ error: 'User does not exist' });
+            }
+        })
+        .catch(next)
+}
 
 // Define the method to check the right token
 exports.permissions = function (req, res) {
