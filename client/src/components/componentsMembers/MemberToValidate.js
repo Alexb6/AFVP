@@ -1,5 +1,7 @@
-import React, { Component } from 'react'
-import { tovalidate } from './MemberFunctions'
+import React, { Component } from 'react';
+import { tovalidate } from './MemberFunctions';
+import axios from 'axios';
+import './MemberToValidate.scss';
 
 class MemberToValidate extends Component {
     constructor() {
@@ -15,11 +17,24 @@ class MemberToValidate extends Component {
             memb_function: '',
             memb_photo: '',
             memb_city: '',
-            memb_degree: ''
+            memb_degree: '',
+            selectedFile: null
         }
 
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
+    }
+
+    onChangeHandler = e => {
+        this.setState({
+            selectedFile: e.target.files[0],
+            loaded: 0
+        })
+        console.log(e.target.files[0]);
+    }
+
+    fileUploadHandler = () => {
+        axios.post('');
     }
 
     onChange(e) {
@@ -78,7 +93,7 @@ class MemberToValidate extends Component {
                                 <input type="text"
                                     className="form-control"
                                     name="memb_name"
-                                    placeholder="Enter Last Name"
+                                    placeholder="Entrez votre nom"
                                     value={this.state.memb_name}
                                     onChange={this.onChange}
                                 />
@@ -108,7 +123,7 @@ class MemberToValidate extends Component {
                                 <input type="password"
                                     className="form-control"
                                     name="memb_password2"
-                                    placeholder="Réenter votre mot de passe"
+                                    placeholder="Réentrez votre mot de passe"
                                     value={this.state.memb_password2}
                                     onChange={this.onChange}
                                 />
@@ -120,15 +135,17 @@ class MemberToValidate extends Component {
                                     name="memb_photo"
                                     placeholder="Votre photo"
                                     value={this.state.memb_photo}
-                                    onChange={this.onChange}
+                                    // onChange={this.onChange}
+                                    onChange={this.onChangeHandler}
                                 />
+                                <button type="button" className="btn btn-success btn-block" onClick={this.fileUploadHandler}>Téléverser</button>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="memb_bio">Biographie</label>
                                 <input type="text"
                                     className="form-control"
                                     name="memb_bio"
-                                    placeholder="Enter votre biographie"
+                                    placeholder="Votre biographie"
                                     value={this.state.memb_bio}
                                     onChange={this.onChange}
                                 />
@@ -138,7 +155,7 @@ class MemberToValidate extends Component {
                                 <input type="text"
                                     className="form-control"
                                     name="memb_hospital"
-                                    placeholder="Enter votre hopital"
+                                    placeholder="Votre hopital"
                                     value={this.state.memb_hospital}
                                     onChange={this.onChange}
                                 />
@@ -148,7 +165,7 @@ class MemberToValidate extends Component {
                                 <input type="text"
                                     className="form-control"
                                     name="memb_function"
-                                    placeholder="Entrez votre fonction"
+                                    placeholder="Votre fonction"
                                     value={this.state.memb_function}
                                     onChange={this.onChange}
                                 />
@@ -158,7 +175,7 @@ class MemberToValidate extends Component {
                                 <input type="text"
                                     className="form-control"
                                     name="memb_city"
-                                    placeholder="Entrez votre ville"
+                                    placeholder="Votre ville"
                                     value={this.state.memb_city}
                                     onChange={this.onChange}
                                 />
@@ -168,7 +185,7 @@ class MemberToValidate extends Component {
                                 <input type="text"
                                     className="form-control"
                                     name="memb_degree"
-                                    placeholder="Entrez votre diplôme"
+                                    placeholder="Votre diplôme"
                                     value={this.state.memb_degree}
                                     onChange={this.onChange}
                                 />

@@ -3,6 +3,7 @@ import jwt_decode from 'jwt-decode'
 // import Button from 'react-bootstrap/Button'
 import { PayPalButton } from 'react-paypal-button-v2'
 import { statustoregistered } from './MemberFunctions'
+import { permission } from './MemberFunctions'
 
 class Profile extends Component {
     constructor() {
@@ -15,15 +16,22 @@ class Profile extends Component {
         }
     }
 
-    componentDidMount() {
-        const token = localStorage.usertoken
-        const decoded = jwt_decode(token)
-        this.setState({
-            memb_id: decoded.memb_id,
-            memb_firstname: decoded.memb_firstname,
-            memb_name: decoded.memb_name,
-            memb_email: decoded.memb_email,
-            memb_status: decoded.memb_status
+
+    componentWillMount() {
+        permission().then(res => {
+            if (!res.permission) {
+                this.props.history.push('/');
+            } else {
+                const token = localStorage.usertoken
+                const decoded = jwt_decode(token)
+                this.setState({
+                    memb_id: decoded.memb_id,
+                    memb_firstname: decoded.memb_firstname,
+                    memb_name: decoded.memb_name,
+                    memb_email: decoded.memb_email,
+                    memb_status: decoded.memb_status
+                })
+            }
         })
     }
 

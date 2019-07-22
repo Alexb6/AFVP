@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import './App.scss'
 
 import MemberNavbar from './components/componentsMembers/MemberNav'
 import MemberWelcome from './components/componentsMembers/MemberWelcome'

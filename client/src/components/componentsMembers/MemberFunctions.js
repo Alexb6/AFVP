@@ -68,10 +68,11 @@ export const validatemember = member => {
 
 
 // Defining the method for the admin to reject a membership
-export const rejectmember = memb_id => {
+export const rejectmember = member => {
     return axios
         .put('/rejectmember', {
-            memb_id: memb_id
+            memb_id: member.memb_id,
+            memb_email: member.memb_email
         })
         .then(res => {
             return res.data
@@ -96,3 +97,20 @@ export const statustoregistered = id => {
         })
 }
 
+// Defining the method to check the member token
+export const permission = () => {
+    return axios
+        .post('/permission', {
+            token: localStorage.getItem('usertoken')
+        })
+        .then(res => {
+            if (res.data.permission) {
+                return ({ permission: true });
+            } else {
+                return ({ permission: false });
+            }
+        })
+        .catch(err => {
+            return err;
+        })
+}

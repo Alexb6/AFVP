@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
-import { memberstovalidate, validatemember, rejectmember} from './MemberFunctions'
-import Button from 'react-bootstrap/Button'
-import FlashMessage from 'react-flash-message'
-import './MembersToValidate.scss'
+import React, { Component } from 'react';
+import { memberstovalidate, validatemember, rejectmember } from './MemberFunctions.js';
+import Button from 'react-bootstrap/Button';
+import './MembersToValidate.scss';
+import ValidateModal from '../componentsModal/ValidateModal';
+// import RejectModal from '../componentsModal/RejectModal';
 
 
 class MembersToValidate extends Component {
@@ -24,41 +25,59 @@ class MembersToValidate extends Component {
             })
     }
 
-    validate(member) {
-        let that = this;
-        validatemember(member).then(function () {
+    closeModalHandler = () => {
+        this.setState({
+            show: false
+        });
+    }
 
-            that.setState({ show: true, message: 'Le status de ' + member.memb_firstname + ' ' + member.memb_name + ' a été changé en "inregistration".' });
+    validate = (member) => {
+        let that = this;
+        validatemember(member).then(() => {
+            that.setState({ show: true, message: 'Vous avez validé l\'adhésion de ' + member.memb_firstname + ' ' + member.memb_name + ' .' });
+
+            memberstovalidate()
+                .then(res => {
+                    this.setState({ members: res });
+                })
         })
     }
 
-    reject(member) {
+    reject = (member) => {
         let that = this;
-        rejectmember(member.memb_id).then(function () {
+        rejectmember(member).then(() => {
+            that.setState({ show: true, message: 'Vous avez rejeté l\'adhésion de ' + member.memb_firstname + ' ' + member.memb_name + ' .' });
 
-            that.setState({ show: false, message: 'Le status de ' + member.memb_firstname + ' ' + member.memb_name + ' a été changé en "rejected".' });
+            memberstovalidate()
+
+                .then(res => {
+                    this.setState({ members: res });
+                })
         })
     }
-
-
 
     render() {
-        let flash;
-        if (this.state.show) {
-            flash = <FlashMessage duration={7000} persistOnHover={true}>
-                <div className="alert-success"><p>{this.state.message}</p></div>
-            </FlashMessage>;
-        } else {
-            flash = <FlashMessage duration={7000} persistOnHover={true}>
-                <div className="alert-warning"><p>{this.state.message}</p></div>
-            </FlashMessage>;
-        }
         return (
             <div className="container">
-                <div className="flashMessage">{flash}</div>
                 <div className="row">
+                    <div className="fit_row col-12">
+                        {this.state.show
+                            ?
+                            <div className="back-drop">
+                                <ValidateModal
+                                    className="modal"
+                                    show={this.state.show}
+                                    close={this.closeModalHandler}
+                                    content={this.state.message}
+                                >
+                                </ValidateModal>
+                            </div>
+                            : null
+                        }
+                    </div>
+
                     <div className="col-md-6 mt-5 mx-auto">
-                        <h2>Demandes d'adhésion</h2>
+                        <h2>Demandes d'adhésion</h2><br />
                         {this.state.members.map(member =>
                             <section key={member.memb_id}>
                                 <p>Photo : {member.memb_photo}</p>
@@ -70,7 +89,7 @@ class MembersToValidate extends Component {
                                 <p>Fonction : {member.memb_function}</p>
                                 <p>Ville : {member.memb_city}</p>
                                 <p>Diplôme : {member.memb_degree}</p><br />
-                                <Button onClick={() => { this.validate(member) }} variant="primary" >Valider</Button>
+                                <Button className="mr-3" onClick={() => { this.validate(member) }} variant="primary" >Valider</Button>
                                 <Button onClick={() => { this.reject(member) }} variant="warning" >Rejeter</Button>
                                 <hr /> <br />
                             </section>
@@ -83,4 +102,4 @@ class MembersToValidate extends Component {
 }
 
 
-export default MembersToValidate
+export default MembersToValidate;

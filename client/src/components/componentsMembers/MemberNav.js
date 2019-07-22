@@ -17,17 +17,18 @@ class Navbar extends Component {
                     </Link>
                 </li>
                 <li className="nav-item">
-                    <Link to="/register" className="nav-link">
+                    <Link to="/tovalidate" className="nav-link">
                         Register
                     </Link>
                 </li>
+
             </ul>
         )
         const userLink = (
             <ul className="navbar-nav">
                 <li className="nav-item">
                     <Link to="/profile" className="nav-link">
-                        User
+                        Profile
                     </Link>
                 </li>
                 <li className="nav-item">
@@ -35,6 +36,7 @@ class Navbar extends Component {
                         Logout
                     </a>
                 </li>
+
             </ul>
         )
 
@@ -58,8 +60,13 @@ class Navbar extends Component {
                                 Home
                             </Link>
                         </li>
+                        {localStorage.usertoken ? userLink : loginRegLink}
+                        <li className="nav-item">
+                            <a href="http://localhost/blogafvp/" target="_blank" rel="noopener noreferrer" className="nav-link">
+                                Blog
+                            </a>
+                        </li>
                     </ul>
-                    {localStorage.usertoken ? userLink : loginRegLink}
                 </div>
             </nav>
         )
