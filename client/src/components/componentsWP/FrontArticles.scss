@@ -1,0 +1,15 @@
+.dernieresPosts, .titrePosts, .resumePosts {
+    text-align : left;
+}
+
+.imgPosts {
+    float: left;
+}
+
+.readMoreInline {
+    display: inline; 
+    &:hover {
+        text-decoration: none; 
+    }
+}
+
